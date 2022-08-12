@@ -4,119 +4,19 @@ import { Table, TableWrapper, Row, Rows, Col, Cols, Cell } from 'react-native-ta
 import styles from './style';
 import DatePicker from 'react-native-date-picker'
 
-const History = (props) => {
-	var itemList = [
-		{
-			"plate": "33M - 3699",
-			"dateTimeIn": "04/08/2022 - 08:55:24",
-			"dateTimeOut": "04/08/2022 - 18:09:13",
-			"money": "30000",
-		},
-		{
-			"plate": "29T - 68228",
-			"dateTimeIn": "04/08/2022 - 19:30:22",
-			"dateTimeOut": "05/08/2022 - 06:03:52",
-			"money": "50000",
-		},
-		{
-			"plate": " - 3699",
-			"dateTimeIn": "04/08/2022 - 08:55:24",
-			"dateTimeOut": "04/08/2022 - 18:09:13",
-			"money": "30000",
-		},
-		{
-			"plate": "29T - 68228",
-			"dateTimeIn": "04/08/2022 - 19:30:22",
-			"dateTimeOut": "05/08/2022 - 06:03:52",
-			"money": "50000",
-		},
-		{
-			"plate": "33M - 3699",
-			"dateTimeIn": "04/08/2022 - 08:55:24",
-			"dateTimeOut": "04/08/2022 - 18:09:13",
-			"money": "30000",
-		},
-		{
-			"plate": "29T - 68228",
-			"dateTimeIn": "04/08/2022 - 19:30:22",
-			"dateTimeOut": "05/08/2022 - 06:03:52",
-			"money": "50000",
-		},
-		{
-			"plate": "33M - 3699",
-			"dateTimeIn": "04/08/2022 - 08:55:24",
-			"dateTimeOut": "04/08/2022 - 18:09:13",
-			"money": "30000",
-		},
-		{
-			"plate": "29T - 68228",
-			"dateTimeIn": "04/08/2022 - 19:30:22",
-			"dateTimeOut": "05/08/2022 - 06:03:52",
-			"money": "50000",
-		},
-		{
-			"plate": "33M - 3699",
-			"dateTimeIn": "04/08/2022 - 08:55:24",
-			"dateTimeOut": "04/08/2022 - 18:09:13",
-			"money": "30000",
-		},
-		{
-			"plate": "29T - 68228",
-			"dateTimeIn": "04/08/2022 - 19:30:22",
-			"dateTimeOut": "05/08/2022 - 06:03:52",
-			"money": "50000",
-		},
-		{
-			"plate": "33M - 3699",
-			"dateTimeIn": "04/08/2022 - 08:55:24",
-			"dateTimeOut": "04/08/2022 - 18:09:13",
-			"money": "30000",
-		},
-		{
-			"plate": "29T - 68228",
-			"dateTimeIn": "04/08/2022 - 19:30:22",
-			"dateTimeOut": "05/08/2022 - 06:03:52",
-			"money": "50000",
-		},
-		{
-			"plate": "33M - 3699",
-			"dateTimeIn": "04/08/2022 - 08:55:24",
-			"dateTimeOut": "04/08/2022 - 18:09:13",
-			"money": "30000",
-		},
-		{
-			"plate": "29T - 68228",
-			"dateTimeIn": "04/08/2022 - 19:30:22",
-			"dateTimeOut": "05/08/2022 - 06:03:52",
-			"money": "50000",
-		},
-		{
-			"plate": "33M - 3699",
-			"dateTimeIn": "04/08/2022 - 08:55:24",
-			"dateTimeOut": "04/08/2022 - 18:09:13",
-			"money": "30000",
-		},
-		{
-			"plate": "29T - 68228",
-			"dateTimeIn": "04/08/2022 - 19:30:22",
-			"dateTimeOut": "05/08/2022 - 06:03:52",
-			"money": "50000",
-		},
-	]
-	var dataTable = [];
-	for (var i in itemList) {
-		var item = itemList[i];
-		dataTable.push([parseInt(i)+1, item.dateTimeIn, item.dateTimeOut, item.money]);
-	}
+const History = ({navigation}) => {
+
 	var headTable = ['STT', 'Thời gian vào', 'Thời gian ra', 'Số tiền\n(VNĐ)'];
 	var tableFlexArray = [1, 3, 3, 3]
+
+	var dataTable = getVehicleList();
 
 	return (
 		<View style={styles.root}>
 			<View style={styles.topWrapper}>
 				<TouchableHighlight style={styles.backIconContainer}
 					onPress={() => {
-						alert("Quay lại")
+						navigation.navigate('Home')
 					}}>
 					<Image
 						source={require("../../img/back_arrow.png")}
@@ -126,12 +26,6 @@ const History = (props) => {
 				<Text style={styles.title}>Trang chủ</Text>
 			</View>
 
-			{/* <View style={styles.mainIconWrapper}>
-				<Image
-					source={require("../../img/lookup.png")}
-					style={styles.mainIconContainer}
-				/>
-			</View> */}
 
 			<View style={styles.filterWrapper}>
 				<View style={styles.dateInputContainer}>
@@ -175,5 +69,116 @@ const History = (props) => {
 			</View>
 		</View>
 	);
+
+	function getVehicleList()
+	{
+		//call api here
+		var _itemList = [
+			{
+				"plate": "33M - 3699",
+				"dateTimeIn": "04/08/2022 - 08:55:24",
+				"dateTimeOut": "04/08/2022 - 18:09:13",
+				"money": "30000",
+			},
+			{
+				"plate": "29T - 68228",
+				"dateTimeIn": "04/08/2022 - 19:30:22",
+				"dateTimeOut": "05/08/2022 - 06:03:52",
+				"money": "50000",
+			},
+			{
+				"plate": " - 3699",
+				"dateTimeIn": "04/08/2022 - 08:55:24",
+				"dateTimeOut": "04/08/2022 - 18:09:13",
+				"money": "30000",
+			},
+			{
+				"plate": "29T - 68228",
+				"dateTimeIn": "04/08/2022 - 19:30:22",
+				"dateTimeOut": "05/08/2022 - 06:03:52",
+				"money": "50000",
+			},
+			{
+				"plate": "33M - 3699",
+				"dateTimeIn": "04/08/2022 - 08:55:24",
+				"dateTimeOut": "04/08/2022 - 18:09:13",
+				"money": "30000",
+			},
+			{
+				"plate": "29T - 68228",
+				"dateTimeIn": "04/08/2022 - 19:30:22",
+				"dateTimeOut": "05/08/2022 - 06:03:52",
+				"money": "50000",
+			},
+			{
+				"plate": "33M - 3699",
+				"dateTimeIn": "04/08/2022 - 08:55:24",
+				"dateTimeOut": "04/08/2022 - 18:09:13",
+				"money": "30000",
+			},
+			{
+				"plate": "29T - 68228",
+				"dateTimeIn": "04/08/2022 - 19:30:22",
+				"dateTimeOut": "05/08/2022 - 06:03:52",
+				"money": "50000",
+			},
+			{
+				"plate": "33M - 3699",
+				"dateTimeIn": "04/08/2022 - 08:55:24",
+				"dateTimeOut": "04/08/2022 - 18:09:13",
+				"money": "30000",
+			},
+			{
+				"plate": "29T - 68228",
+				"dateTimeIn": "04/08/2022 - 19:30:22",
+				"dateTimeOut": "05/08/2022 - 06:03:52",
+				"money": "50000",
+			},
+			{
+				"plate": "33M - 3699",
+				"dateTimeIn": "04/08/2022 - 08:55:24",
+				"dateTimeOut": "04/08/2022 - 18:09:13",
+				"money": "30000",
+			},
+			{
+				"plate": "29T - 68228",
+				"dateTimeIn": "04/08/2022 - 19:30:22",
+				"dateTimeOut": "05/08/2022 - 06:03:52",
+				"money": "50000",
+			},
+			{
+				"plate": "33M - 3699",
+				"dateTimeIn": "04/08/2022 - 08:55:24",
+				"dateTimeOut": "04/08/2022 - 18:09:13",
+				"money": "30000",
+			},
+			{
+				"plate": "29T - 68228",
+				"dateTimeIn": "04/08/2022 - 19:30:22",
+				"dateTimeOut": "05/08/2022 - 06:03:52",
+				"money": "50000",
+			},
+			{
+				"plate": "33M - 3699",
+				"dateTimeIn": "04/08/2022 - 08:55:24",
+				"dateTimeOut": "04/08/2022 - 18:09:13",
+				"money": "30000",
+			},
+			{
+				"plate": "29T - 68228",
+				"dateTimeIn": "04/08/2022 - 19:30:22",
+				"dateTimeOut": "05/08/2022 - 06:03:52",
+				"money": "50000",
+			},
+		]
+
+		var _dataTable = [];
+		for (var i in _itemList) {
+			var item = _itemList[i];
+			_dataTable.push([parseInt(i)+1, item.dateTimeIn, item.dateTimeOut, item.money]);
+		}
+
+		return _dataTable;
+	}
 }
 export default History;

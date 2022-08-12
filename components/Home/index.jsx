@@ -2,9 +2,10 @@ import React, { useState } from 'react';
 import { TouchableHighlight, Text, View, Image } from 'react-native';
 import styles from './style';
 
-const Home = (props) => {
-	const OPTIONS = { PAY_OPTION: 0, PROFILE_OPTION: 1, HISTORY_OPTION: 2, HOME_OPTION: 3 };
-	const [option, setOption] = useState(OPTIONS.HOME_OPTION);
+const Home = ({navigation}) => {
+	var info = {};
+
+	getInfo();
 	return (
 		<View style={styles.container}>
 			<View style={styles.iconContainer}>
@@ -15,10 +16,10 @@ const Home = (props) => {
 			</View>
 
 			<View style={styles.top}>
-				<Text style={styles.welcome}>Chào Đạt, </Text>
+				<Text style={styles.welcome}>Chào {info.name}, </Text>
 				<View style={styles.walletBar}>
 					<Image source={require('./img/wallet.png')} style={styles.walletIcon} />
-					<Text style={styles.walletText}>100.000 VNĐ</Text>
+					<Text style={styles.walletText}>{info.balance} VNĐ</Text>
 				</View>
 			</View>
 
@@ -30,7 +31,7 @@ const Home = (props) => {
 				<View style={styles.optionContainer}>
 					<TouchableHighlight
 						onPress={() => {
-							alert("Đang tới mục Nạp tiền...")
+							navigation.navigate('Pay')
 						}}
 					>
 						<Image style={styles.optionIcon} source={require('../../img/pay.png')} />
@@ -38,7 +39,7 @@ const Home = (props) => {
 
 					<TouchableHighlight
 						onPress={() => {
-							alert("Đang tới mục Thông tin cá nhân...")
+							navigation.navigate('Profile')
 						}}
 					>
 						<Image style={styles.optionIcon} source={require('../../img/profile.png')} />
@@ -46,7 +47,7 @@ const Home = (props) => {
 
 					<TouchableHighlight
 						onPress={() => {
-							alert("Đang tới mục Tra cứu lịch sử...")
+							navigation.navigate('History')
 						}}
 					>
 						<Image style={styles.optionIcon} source={require('../../img/lookup.png')} />
@@ -55,6 +56,15 @@ const Home = (props) => {
 			</View>
 		</View>
 	);
+
+	function getInfo()
+	{
+		//call api here
+		//fetch('getInfoUrl');
+		info["name"] = "Đạt";
+		info["balance"] = 100000;
+	}
+
 };
 
 export default Home

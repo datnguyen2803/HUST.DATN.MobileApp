@@ -2,14 +2,17 @@ import React, { useState } from 'react';
 import { Text, TextInput, View, Image, TouchableHighlight } from 'react-native';
 import styles from './style';
 
-const Profile = (props) => {
+const Profile = ({navigation}) => {
+
+	var info = {};
+	getInfo();
 
 	return (
 		<View style={styles.root}>
 			<View style={styles.topWrapper}>
 				<TouchableHighlight style={styles.backIconContainer}
 					onPress={() => {
-						alert("Quay lại")
+						navigation.navigate('Home')
 					}}>
 					<Image
 						source={require("../../img/back_arrow.png")}
@@ -28,19 +31,17 @@ const Profile = (props) => {
 
 			<View style={styles.infoWrapper}>
 				<View style={styles.infoContainer}>
-					<Text style={styles.info}>Họ và tên: Nguyễn Tiến Đạt</Text>
+					<Text style={styles.info}>Họ và tên: {info.fullname}</Text>
 				</View>
 				<View style={styles.infoContainer}>
-					<Text style={styles.info}>SĐT: 0352004870</Text>
+					<Text style={styles.info}>SĐT: {info.phone}</Text>
 				</View>
 				<View style={styles.infoContainer}>
-					<Text style={styles.info}>Biển số xe: 33M-3699</Text>
+					<Text style={styles.info}>Biển số xe: {info.plate}</Text>
 				</View>
 				<View style={styles.infoContainer}>
-					<Text style={styles.info}>Số dư: 100.000 VNĐ</Text>
+					<Text style={styles.info}>Số dư: {info.balance} VNĐ</Text>
 				</View>
-
-
 
 			</View>
 
@@ -54,12 +55,21 @@ const Profile = (props) => {
 
 				<TouchableHighlight style={styles.button}
 					onPress={() => {
-						alert("Nạp tiền")
+						navigation.navigate('Pay')
 					}}>
 					<Text style={styles.buttonText}>Nạp tiền</Text>
 				</TouchableHighlight>
 			</View>
 		</View>
 	);
+
+	//call API here
+	function getInfo()
+	{
+		info["fullname"] = "Nguyễn Tiến Đạt"
+		info["phone"] = "0352004870"
+		info["plate"] = "33M-3699"
+		info["balance"] = 100000
+	}
 }
 export default Profile;

@@ -2,9 +2,10 @@ import React, { useState } from 'react';
 import { Text, TextInput, View, Image, TouchableHighlight } from 'react-native';
 import styles from './style';
 
-const Login = (props) => {
-	const [login, setLogin] = useState(false);
-	const [signUp, setSignUp] = useState(false);
+const Login = ({ navigation }) => {
+	const [userName, setUserName] = useState("");
+	const [password, setPassword] = useState("");
+
 	return (
 
 		<View style={styles.container}>
@@ -24,6 +25,8 @@ const Login = (props) => {
 					<TextInput
 						style={styles.input}
 						placeholder="Tên đăng nhập"
+						onChangeText={newText => setUserName(newText)}
+						defaultValue={userName.toString()}
 					/>
 				</View>
 				<View style={styles.inputBar}>
@@ -31,6 +34,8 @@ const Login = (props) => {
 						secureTextEntry={true}
 						style={styles.input}
 						placeholder="Mật khẩu"
+						onChangeText={newText => setPassword(newText)}
+						defaultValue={password.toString()}
 					/>
 				</View>
 
@@ -45,7 +50,11 @@ const Login = (props) => {
 				<TouchableHighlight
 					style={styles.loginBut}
 					onPress={() => {
-						alert("Đăng nhập thành công")
+						var test = checkLogin();
+						if (test == 1) {
+							navigation.navigate('Home')
+						}
+
 					}}>
 					<Text style={styles.loginText}>Đăng nhập</Text>
 				</TouchableHighlight>
@@ -53,7 +62,7 @@ const Login = (props) => {
 					<Text>Chưa có tài khoản? </Text>
 					<TouchableHighlight
 						onPress={() => {
-							alert("Đăng ký thành công")
+							navigation.navigate('Signup')
 						}}>
 						<Text style={styles.signUpText}>Đăng ký</Text>
 					</TouchableHighlight>
@@ -61,5 +70,33 @@ const Login = (props) => {
 			</View>
 		</View>
 	);
+
+	function checkLogin() {
+		return 1;
+		if (userName == "") {
+			alert("Vui lòng điền tên đăng nhập");
+			return 0;
+		}
+		if (password == "") {
+			alert("Bạn chưa điền mật khẩu");
+			return 0;
+		}
+
+		//write api here
+		//var loginurl = 'https://mywebsite.com/endpoint/' + userName + '/' + password;
+		//fetch(loginurl);
+		if (userName == "admin" && password == "admin") {
+			setUserName("");
+			setPassword("");
+			return 1;
+		}
+		else {
+			alert("Sai tên đăng nhập hoặc mật khẩu\nVui lòng nhập lại");
+			return 0;
+		}
+
+	};
+
+
 }
 export default Login;
